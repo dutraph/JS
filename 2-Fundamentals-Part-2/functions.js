@@ -26,6 +26,14 @@ function calcAge(thisYear, birthYear){
 
 console.log(calcAge(2021, 1990));
 
+function personelData(name, age, job){
+    if (age >=18){
+        return `Yo ${name}, you can join our club, you're ${age}`
+    }else{ return `GTFO here dude... go back to your ${job} job`}
+}
+
+console.log(personelData("Mark", 19, "IT Tech"))
+
 // function expression ( anonimous function)
 // For this kind of function we can only call it after the declaration
 const calcAge2 = function(birthYear){
@@ -45,3 +53,38 @@ const yearsUntilRetirement = (firstName,birthYear) => {
 }
 
 console.log(yearsUntilRetirement("Paulo",1990))
+
+
+const personalData = (name, age, job) => {
+    if (age >=18){
+        return `Yo ${name}, you can join our cannabis club, you're ${age}`
+    }else{ return `GTFO here dude... go back to your ${job} job`}
+}
+
+console.log(personalData("Jack", 18, "chashier"))
+
+
+// Functions calling other functions
+
+function callFunc() {
+    console.log("Calling testHw function")
+    testHw()
+}
+function testHw() {
+    console.log("Hello World!")
+}
+
+callFunc()
+
+function cutFruitPieces(fruit){
+    return fruit * 4;
+}
+
+const fruitProcessor2 = (apples, oranges) => {
+    const applePieces = cutFruitPieces(apples);
+    const orangePieces = cutFruitPieces(oranges);
+    const juice = `Juice with ${applePieces} pieces of apples, and ${orangePieces} pieces of oranges`;
+    return juice;
+}
+
+console.log(fruitProcessor2(3, 5))
