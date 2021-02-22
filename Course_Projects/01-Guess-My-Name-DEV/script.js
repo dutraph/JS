@@ -8,13 +8,11 @@
 
 // Functions section
 function newHighScore() {
-  // return (document.querySelector('.highscore').textContent = highScore());
   return docQuerySelText('.highscore', highScore());
 }
 
 function Score() {
   score--;
-  // return (document.querySelector('.score').textContent = score);
   docQuerySelText('.score', score);
 }
 
@@ -80,7 +78,6 @@ document.querySelector('.check').addEventListener('click', function () {
 });
 
 //Play again button
-
 document.querySelector('.again').addEventListener('click', function () {
   score = 20;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
