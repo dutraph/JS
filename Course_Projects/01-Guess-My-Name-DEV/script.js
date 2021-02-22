@@ -43,7 +43,6 @@ function styleDefault() {
 
 // add +1 to the end to make sure that will be > 0
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
-console.log(secretNumber);
 let score = 20;
 let highscore = 0;
 document.querySelector('.check').addEventListener('click', function () {
@@ -81,7 +80,6 @@ document.querySelector('.check').addEventListener('click', function () {
 document.querySelector('.again').addEventListener('click', function () {
   score = 20;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
-  console.log(secretNumber);
   docQuerySelText('.message', 'Start guessing...');
   docQuerySelText('.score', score);
   docQuerySelText('.number', '?');
