@@ -5,63 +5,89 @@
     Allows Javascript to access HTML elements and styles to manipulate them.
     DOM = WEB APIs !== Javascript
 */
-// console.log(document.querySelector('.message').textContent);
-// document.querySelector('.message').textContent = 'Aeeeeee';
-// console.log(document.querySelector('.message').textContent);
 
-// document.querySelector('.number').textContent = 13;
-// document.querySelector('.score').textContent = 13;
+// Functions section
+function newHighScore() {
+  // return (document.querySelector('.highscore').textContent = highScore());
+  return docQuerySelText('.highscore', highScore());
+}
 
-// document.querySelector('.guess').value = 23;
-// console.log(document.querySelector('.guess').value);
+function Score() {
+  score--;
+  // return (document.querySelector('.score').textContent = score);
+  docQuerySelText('.score', score);
+}
+
+function highScore() {
+  if (score > highscore) {
+    highscore = score;
+    docQuerySelText('.highscore', highscore);
+  }
+}
+
+const docQuerySelText = (element, message) =>
+  (document.querySelector(element).textContent = message);
+
+const docQuerySelValue = (element, message) =>
+  (document.querySelector(element).value = message);
+
+function styleWin() {
+  document.querySelector('body').style.backgroundColor = '#60b347';
+  document.querySelector('.number').style.width = '30rem';
+  document.querySelector('.number').style.fontSize = '12rem';
+}
+
+function styleDefault() {
+  document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.number').style.width = '15rem';
+  document.querySelector('.number').style.fontSize = '6rem';
+}
 
 // add +1 to the end to make sure that will be > 0
-const correctNumber = Math.trunc(Math.random() * 20) + 1;
-// PAULO LOGIC
-// document.querySelector('.check').addEventListener('click', function () {
-//   let guessedNumber = Number(document.querySelector('.guess').value);
-//   if (guessedNumber === correctNumber) {
-//     let winMsg = (document.querySelector('.message').textContent = 'Aeeeeee');
-//     // let highscore = document.querySelector('.highscore').textContent;
-//     // let score = document.querySelector('.score').textContent;
-//     winMsg;
-//     document.querySelector('.highscore').textContent = document.querySelector(
-//       '.score'
-//     ).textContent;
-//   } else {
-//     document.querySelector('.message').textContent = 'Try Again....';
-//     let typeScore = Number(document.querySelector('.score').textContent);
-//     document.querySelector('.score').textContent -= 1;
-//     if (document.querySelector('.score').textContent == 0) {
-//       document.querySelector('.message').textContent = 'Game Over';
-//     }
-//   }
-// });
-
-// Course logic + Paulo
-// document.querySelector('.number').textContent = correctNumber;
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
+console.log(secretNumber);
 let score = 20;
+let highscore = 0;
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
 
+  // No input
   if (!guess) {
-    document.querySelector('.message').textContent = '🚨 No Number! ';
-  } else if (guess === correctNumber) {
-    document.querySelector('.message').textContent = '🎉  Nice Shot 🎉 ';
-    document.querySelector('.highscore').textContent = document.querySelector(
-      '.score'
-    ).textContent;
-    document.querySelector('.number').textContent = correctNumber;
-  } else if (guess > correctNumber) {
-    document.querySelector('.message').textContent =
-      'To high, try again... 👎 ';
-    score--;
-    document.querySelector('.score').textContent = score;
-  } else if (guess < correctNumber) {
-    document.querySelector('.message').textContent = 'To low, try again... 👎 ';
-    score--;
-    document.querySelector('.score').textContent = score;
-  } else if (document.querySelector('.score') == 0) {
-    document.querySelector('.message').textContent = 'Game Over';
+    docQuerySelText('.message', '🚨 No Number!');
+
+    // Player wins
+  } else if (guess === secretNumber) {
+    docQuerySelText('.message', '🎉  Nice Shot 🎉');
+    docQuerySelText('.number', secretNumber);
+    highScore();
+
+    // CSS
+    styleWin();
+
+    // guess to high
+  } else if (guess !== secretNumber) {
+    if (score > 1) {
+      docQuerySelText(
+        '.message',
+        guess > secretNumber ? '⤴  To high...' : '⤵  To low...'
+      );
+      Score();
+    } else {
+      docQuerySelText('.score', 0);
+      docQuerySelText('.message', 'Game Over');
+    }
   }
+});
+
+//Play again button
+
+document.querySelector('.again').addEventListener('click', function () {
+  score = 20;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  console.log(secretNumber);
+  docQuerySelText('.message', 'Start guessing...');
+  docQuerySelText('.score', score);
+  docQuerySelText('.number', '?');
+  docQuerySelValue('.guess', '');
+  styleDefault();
 });
