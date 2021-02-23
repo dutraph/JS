@@ -99,8 +99,6 @@ querySelector('.check')
 
     if (score <= 1) return gameOver()
 
-    console.log(1)
-
     gameGuess(
       guess > secretNumber
         ? '⤴  To high...'
