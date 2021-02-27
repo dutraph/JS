@@ -50,3 +50,4 @@ console.log(pauloObject);
 console.log(pauloObject.age);
 
 console.log(pauloObject.getSummary());
+console.log();
