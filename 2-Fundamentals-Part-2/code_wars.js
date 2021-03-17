@@ -8,4 +8,4 @@ function filter_list(list) {
   return new_list;
 }
 
-console.log(filter_list(['ava', 1, 2, 'a', 'b']));
+console.log(filter_list(['ava', 1, 2, 'a', 'b', 4, 19]));

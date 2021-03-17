@@ -25,7 +25,7 @@ console.log(groceriesList);
 groceriesList.shift(); // First element
 console.log(groceriesList);
 
-// Show the index number of an element
+// Shows the index number of an element
 groceriesList.indexOf('peach');
 
 const search = 'egg';
